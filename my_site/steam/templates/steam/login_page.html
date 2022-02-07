@@ -7,10 +7,12 @@
    <h3>Sign in here</h3>
    
    
-   <form action="login.php" method="post">
+   <form action="{% url 'login' %}" method="post">
        <div class="inputBox"> 
-           <input id="uname" type="text" name="Username" placeholder="Username">
-         <input id="pass" type="password" name="Password" placeholder="Password"> </div>
+           {% for field in forms %}
+           {{field.label_tag}}
+            {{field}}
+            {% endfor %} </div>
           <input type="submit" name="" value="Login">
    </form> <a href="#">Forget Password<br> </a>
    <div class="text-center">

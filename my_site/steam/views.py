@@ -18,7 +18,8 @@ def test_template(requests):
     return render(requests, 'index.html', context)
 
 def pattern(requests):
-    return render(requests, 'steam/login_page.html')
+    form = LoginForm()
+    return render(requests, 'steam/login_page.html', {'forms':form})
 
 def test_form(requests):
     if requests.method == 'POST':
