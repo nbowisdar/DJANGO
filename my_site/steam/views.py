@@ -4,12 +4,15 @@ from django.shortcuts import render
 from django.template import Template, Context
 import my_site.settings as x
 from .forms import *
+from django.contrib.auth.models import User
 
 
 context = {'name':'Mari', 'age':'19'}
 
 def funk(requests):
-    return HttpResponse(f'<h1>{x.BASE_DIR}</h1>')
+    requests.session['count'] = requests.session.get('count', 0) + 1
+
+    return HttpResponse(f"<h1> You already was in this site {requests.session.get('count')} times</h1>")
 
 def test_template(requests):
     # d = Template(text)
@@ -19,6 +22,8 @@ def test_template(requests):
 
 def pattern(requests):
     form = LoginForm()
+
+    print(type(requests.session))
     return render(requests, 'steam/login_page.html', {'forms':form})
 
 def test_form(requests):
@@ -31,3 +36,14 @@ def test_form(requests):
     else:
         form = MyFrom()
     return render(requests, 'test_form.html', {'form':form})
+
+def test_new_login(requests):
+    if requests.method == 'POST':
+        data = requests.POST
+        for i in data:
+            print(i)
+        #user = User.objects.create_user()
+
+    else:
+        form = User()
+    return render(requests, 'test_form copy.html', {'form':form})

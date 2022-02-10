@@ -1,0 +1,21 @@
+<style>
+    .field{
+        color: chocolate;
+        padding: 2px;
+    }
+</style>
+
+<h1>Hello froms</h1>
+
+<form action="{% url 'test_form' %}", method="post">
+    {% csrf_token %}
+
+    <div class ='field'>
+        {{ form }}
+
+    </div>
+
+    <button type="submit">Click</button>
+</form>
+
+<h5>Go to the good form <a href="{% url 'login' %}">page</a></h5>
