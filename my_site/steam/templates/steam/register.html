@@ -4,12 +4,20 @@
 {% block content %}
 
 <form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
     {% for field in form %}
 
     {{ field }}
 
     {% endfor %}
 
+    <input type="submit" value="Register">
 </form>
+
+
+<div class="text-center">
+    <p><a href="{% url 'login'%}" style="color: #59238F;">Login</p>
+    </div>
+
 
 {% endblock %}

@@ -40,9 +40,10 @@ def test_form(requests):
 def register(requests):
     if requests.method == 'POST':
         data = requests.POST
-        for i in data:
-            print(i)
-        #user = User.objects.create_user()
+        user = User.objects.create_user(username=data['username'], password=data['password'], email=data['email'])
+        
+
+
 
 
     form = LoginForm()

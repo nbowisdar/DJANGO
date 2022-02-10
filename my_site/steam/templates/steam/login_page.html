@@ -3,12 +3,17 @@
 
    {% block content %}
    <form action="{% url 'login' %}" method="post">
- 
+        {% csrf_token %}
            {% for field in forms %}
            {{field.label_tag}}
             {{field}}
             {% endfor %}
           <input type="submit" name="" value="Login">
    </form> <a href="#">Forget Password<br> </a>
+
+   <div class="text-center">
+    <p><a href="{% url 'register'%}" style="color: #59238F;">Sign-Up</p>
+    </div>
+
    {% endblock %}
 
