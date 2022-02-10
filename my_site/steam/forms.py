@@ -13,5 +13,6 @@ class MyFrom(forms.Form):
 
 class LoginForm(forms.Form):
     login = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder':'Username', 'id':'uname'}))
+    email = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder':'Email', 'id':'email'}))
     password = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder':'Password', 'id':'pass'}))
 

@@ -1,22 +1,14 @@
 {% extends 'steam/base.html' %}
 
-<h3>Below you can see new block</h3>
 
-{% block content %}
-<div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
-   <h3>Sign in here</h3>
-   
-   
+   {% block content %}
    <form action="{% url 'login' %}" method="post">
-       <div class="inputBox"> 
+ 
            {% for field in forms %}
            {{field.label_tag}}
             {{field}}
-            {% endfor %} </div>
+            {% endfor %}
           <input type="submit" name="" value="Login">
    </form> <a href="#">Forget Password<br> </a>
-   <div class="text-center">
-       <p style="color: #59238F;">Sign-Up</p>
-   </div>
-</div>
-{% endblock %}
+   {% endblock %}
+

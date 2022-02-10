@@ -8,5 +8,5 @@ urlpatterns = [
     path('login', pattern, name='login'),
     path('test_temp', test_template),
     path('test_form', test_form, name='test_form'),
-    path('test_new_form', test_new_login)
+    path('register', register, name='register')
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -37,13 +37,13 @@ def test_form(requests):
         form = MyFrom()
     return render(requests, 'test_form.html', {'form':form})
 
-def test_new_login(requests):
+def register(requests):
     if requests.method == 'POST':
         data = requests.POST
         for i in data:
             print(i)
         #user = User.objects.create_user()
 
-    else:
-        form = User()
-    return render(requests, 'test_form copy.html', {'form':form})
+
+    form = LoginForm()
+    return render(requests, 'steam/register.html', {'form':form})
