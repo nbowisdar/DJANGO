@@ -1,27 +1,36 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template import Template, Context
-import my_site.settings as x
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
+class Test(ListView):
+    model = 'Test'
+    def get_context_data(self, *, object_list=None, **kwargs):
+        super(ListView).get_context_data()
 
-context = {'name':'Mari', 'age':'19'}
 
 def funk(requests):
     requests.session['count'] = requests.session.get('count', 0) + 1
+    return HttpResponse(f"<h1> You already was in this site {requests.session.get('count')} times</h1>"
+                        f"<h3>All info about session {requests.session}"
+                        f"Your requests look like - {requests.headers}")
 
-    return HttpResponse(f"<h1> You already was in this site {requests.session.get('count')} times</h1>")
+class Test_View(TemplateView):
+    extra_context = {'name': 'Vladimir', 'age': '21'}
+    template_name = 'index.html'
 
 def test_template(requests):
-    # d = Template(text)
-    # rez = d.render(context)
-    # return HttpResponse(rez)
+    context = {'name': 'Mari', 'age': '19'}
+
     return render(requests, 'index.html', context)
 
 def pattern(requests):
-    form = LoginForm()
+    form = RegisterForm()
 
     print(type(requests.session))
     return render(requests, 'steam/login_page.html', {'forms':form})
@@ -41,10 +50,15 @@ def register(requests):
     if requests.method == 'POST':
         data = requests.POST
         user = User.objects.create_user(username=data['username'], password=data['password'], email=data['email'])
-        
-
-
-
-
-    form = LoginForm()
+    form = RegisterForm()
+    #form = UserCreationForm()
     return render(requests, 'steam/register.html', {'form':form})
+
+class RegisterUser(CreateView):
+    form_class = RegisterForm
+    template_name = 'steam/register.html'
+    success_url = reverse_lazy('login')
+
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super(Register_view, self).get_context_data(**kwargs)
+        #c_def = self.get_user_context(title)

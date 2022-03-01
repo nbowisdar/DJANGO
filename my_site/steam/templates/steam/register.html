@@ -3,12 +3,15 @@
 
 {% block content %}
 
+
+
 <form action="{% url 'register' %}" method="post">
     {% csrf_token %}
     {% for field in form %}
 
     {{ field }}
-
+    <div style="color: red;" >{{ field.errors }}</div>
+    
     {% endfor %}
 
     <input type="submit" value="Register">
