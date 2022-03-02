@@ -4,10 +4,8 @@
    {% block content %}
    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-           {% for field in forms %}
-           {{field.label_tag}}
-            {{field}}
-            {% endfor %}
+           {{ form.username }}
+           {{ form.password }}
           <input type="submit" name="" value="Login">
    </form> <a href="#">Forget Password<br> </a>
 
